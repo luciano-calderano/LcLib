@@ -26,24 +26,51 @@ public extension Dictionary {
     }
     
     func double (_ key: String) -> Double {
-        if let s = value(key) as? String, let v = Double(s) {
-            return v
+        if let v = value(key) {
+            if v is Double {
+                return v as! Double
+            }
+            if let s = v as? String, s.count > 0 {
+                return Double(s)!
+            }
         }
         return 0
     }
     
     func int (_ key: String) -> Int {
-        if let s = value(key) as? String, let v = Int(s) {
-            return v
+        if let v = value(key) {
+            if v is Int {
+                return v as! Int
+            }
+            if let s = v as? String, s.count > 0 {
+                return Int(s)!
+            }
         }
         return 0
     }
     
     func bool (_ key: String) -> Bool {
-        if let s = value(key) as? String {
-            return s == "1" || s.lowercased() == "true" || s.lowercased().left(lenght: 1) == "y"
+        if let v = value(key) {
+            if v is Bool {
+                return v as! Bool
+            }
+            if let s = v as? String, s.count > 0 {
+                return s == "1" || s.lowercased() == "true" || s.lowercased().left(lenght: 1) == "y"
+            }
         }
         return false
+    }
+    
+    func date (_ key: String, fmt: String = "") -> Date? {
+        if let v = value(key) {
+            if v is Date {
+                return v as? Date
+            }
+            if fmt.count > 0, let s = v as? String, s.count > 0 {
+                return s.toDate(withFormat: fmt)
+            }
+        }
+        return nil
     }
     
     func string (_ key: String) -> String {
@@ -65,18 +92,5 @@ public extension Dictionary {
             return arr
         }
         return []
-    }
-    
-    func date (_ key: String, fmt: String = "") -> Date? {
-        if fmt.isEmpty {
-            if let d = value(key) as? Date {
-                return d
-            }
-        } else {
-            if let s = value(key) as? String, s.count > 0 {
-                return s.toDate(withFormat: fmt)
-            }
-        }
-        return nil
     }
 }
