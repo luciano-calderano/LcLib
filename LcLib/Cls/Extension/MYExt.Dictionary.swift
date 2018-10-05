@@ -7,36 +7,43 @@
 //
 
 import Foundation
-
 public extension Dictionary {
-    private typealias LcDict = Dictionary<Key, Value>
-    func value<T>(_ keys: String) -> T? {
+    private func value<T>(_ keys: String) -> T? {
         let array = keys.components(separatedBy: "->")
         
-        var dic = self as LcDict
+        var dic = self as! Dictionary<String, Any>
         for key in array.dropLast() {
-            guard let next = dic[key as! Key] else {
+            guard let next = dic[key] as? Dictionary<String, Any> else {
                 return nil
             }
-            guard next is LcDict else {
-                return nil
-            }
-            
-            dic = next as! LcDict
+            dic = next // as! Dictionary<String, Any>
         }
         
-        guard let value = dic[array.last! as! Key] else {
-            return nil
+        if let k = array.last, let value = dic[k] {
+            return value as? T
         }
-        return value as? T
+        return nil
     }
     
     func double (_ key: String) -> Double {
-        return value(key) ?? 0
+        if let s:String = value(key), let v = Double(s) {
+            return v
+        }
+        return 0
     }
     
     func int (_ key: String) -> Int {
-        return value(key) ?? 0
+        if let s:String = value(key), let v = Int(s) {
+            return v
+        }
+        return 0
+    }
+    
+    func bool (_ key: String) -> Bool {
+        if let v:String = value(key) {
+            return v == "1" || v.lowercased() == "true" || v.lowercased().left(lenght: 1) == "y"
+        }
+        return false
     }
     
     func string (_ key: String) -> String {
@@ -51,16 +58,6 @@ public extension Dictionary {
         return value(key) ?? []
     }
     
-    func bool (_ key: String) -> Bool {
-        guard let ret:String = value(key) else {
-            guard let boolRet:Bool = value(key) else {
-                return false
-            }
-            return boolRet
-        }
-        return ret == "1" || ret.lowercased() == "true" || ret.lowercased().left(lenght: 1) == "y"
-    }
-    
     func date (_ key: String, fmt: String = "") -> Date? {
         if fmt.isEmpty {
             return value(key) ?? nil
@@ -72,4 +69,3 @@ public extension Dictionary {
         return nil
     }
 }
-
