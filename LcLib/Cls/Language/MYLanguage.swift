@@ -15,7 +15,7 @@ public extension String {
         if self.isEmpty {
             return ""
         }
-        return self.left(lenght: 1) == "#" ? MYLang.value(self.mid(startAtChar: 2, lenght: self.count - 1)) : self
+        return left(lenght: 1) == "#" ? MYLang.value(mid(startAtChar: 2)) : self
     }
 }
 
@@ -89,11 +89,11 @@ public class MYLang {
             guard riga.count == 2 else {
                 continue
             }
-            let valuesArray = riga[1].components(separatedBy: "|") as [String]
+            let valuesArray = riga.last!.components(separatedBy: "|") as [String]
             guard valuesArray.count == langList.count else {
                 continue
             }
-            dic[riga[0]] = valuesArray[index]
+            dic[riga.first!] = valuesArray[index]
         }
         return dic
     }

@@ -18,12 +18,12 @@ public extension UIView {
     }
 
     func addSubviewWithConstraints (_ view: UIView, top: CGFloat = 0, left: CGFloat = 0, bottom: CGFloat = 0, right: CGFloat = 0) {
-        let edge = UIEdgeInsets.init(top: top, left: left, bottom: bottom, right: right)
+        let edge = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         addSubviewWithConstraints(view, edge: edge)
     }
     
     func addSubviewWithConstraints (_ view: UIView, edge: UIEdgeInsets = UIEdgeInsets.zero) {
-        self.addSubview(view)
+        addSubview(view)
         costraintTo(view: view, atb: .top,     f: edge.top)
         costraintTo(view: view, atb: .left,    f: edge.left)
         costraintTo(view: view, atb: .bottom,  f: edge.bottom)
@@ -44,6 +44,14 @@ public extension UIView {
                                                attribute:   atb,
                                                multiplier:  1,
                                                constant:    f))
+    }
+    
+    func insert(inView v:UIView, top: CGFloat = 0, lead: CGFloat = 0, bottom: CGFloat = 0, trail: CGFloat = 0 ) {
+        translatesAutoresizingMaskIntoConstraints = false
+        topAnchor.constraint(equalTo: v.topAnchor, constant: top).isActive = true
+        leadingAnchor.constraint(equalTo: v.leadingAnchor, constant: lead).isActive = true
+        trailingAnchor.constraint(equalTo: v.trailingAnchor, constant: -trail).isActive = true
+        bottomAnchor.constraint(equalTo: v.bottomAnchor, constant: -bottom).isActive = true
     }
 }
 
