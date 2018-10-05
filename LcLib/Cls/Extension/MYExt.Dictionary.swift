@@ -8,7 +8,7 @@
 
 import Foundation
 public extension Dictionary {
-    private func value<T>(_ keys: String) -> T? {
+    private func value (_ keys: String) -> Any? {
         let array = keys.components(separatedBy: "->")
         
         var dic = self as! Dictionary<String, Any>
@@ -16,55 +16,66 @@ public extension Dictionary {
             guard let next = dic[key] as? Dictionary<String, Any> else {
                 return nil
             }
-            dic = next // as! Dictionary<String, Any>
+            dic = next
         }
         
         if let k = array.last, let value = dic[k] {
-            return value as? T
+            return value
         }
         return nil
     }
     
     func double (_ key: String) -> Double {
-        if let s:String = value(key), let v = Double(s) {
+        if let s = value(key) as? String, let v = Double(s) {
             return v
         }
         return 0
     }
     
     func int (_ key: String) -> Int {
-        if let s:String = value(key), let v = Int(s) {
+        if let s = value(key) as? String, let v = Int(s) {
             return v
         }
         return 0
     }
     
     func bool (_ key: String) -> Bool {
-        if let v:String = value(key) {
-            return v == "1" || v.lowercased() == "true" || v.lowercased().left(lenght: 1) == "y"
+        if let s = value(key) as? String {
+            return s == "1" || s.lowercased() == "true" || s.lowercased().left(lenght: 1) == "y"
         }
         return false
     }
     
     func string (_ key: String) -> String {
-        return value(key) ?? ""
+        if let s = value(key) as? String {
+            return s
+        }
+        return ""
     }
     
     func dictionary(_ key: String) -> Dictionary<Key, Value> {
-        return value(key) ?? [:]
+        if let dict = value(key) as? Dictionary<Key, Value> {
+            return dict
+        }
+        return [:]
     }
     
     func array(_ key: String) -> Array<Any> {
-        return value(key) ?? []
+        if let arr = value(key) as? Array<Any> {
+            return arr
+        }
+        return []
     }
     
     func date (_ key: String, fmt: String = "") -> Date? {
         if fmt.isEmpty {
-            return value(key) ?? nil
-        }
-        
-        if let ret:String = value(key) {
-            return ret.isEmpty ? nil : ret.toDate(withFormat: fmt)
+            if let d = value(key) as? Date {
+                return d
+            }
+        } else {
+            if let s = value(key) as? String, s.count > 0 {
+                return s.toDate(withFormat: fmt)
+            }
         }
         return nil
     }
