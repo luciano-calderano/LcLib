@@ -6,14 +6,14 @@
 git init
 git add .
 git commit -m "Initial commit"
-git remote add origin https://github.com/lucianocalderano/LcLib.git
+git remote add origin https://github.com/luciano-calderano/LcLib.git
 
 pod spec create LcLib
-pod repo add LcLib https://github.com/lucianocalderano/LcLib.git
+pod repo add LcLib https://github.com/luciano-calderano/LcLib.git
 
 ---
 
-git add . ; git commit -a -m "compatibilità 9.0"
+git add . ; git commit -a -m "1.1.1"
 git tag 1.1.1; git push --tags
 
 pod repo push LcLib LcLib.podspec
