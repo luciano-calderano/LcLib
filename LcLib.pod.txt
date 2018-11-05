@@ -14,6 +14,6 @@ pod repo add LcLib https://github.com/lucianocalderano/LcLib.git
 ---
 
 git add . ; git commit -a -m "compatibilità 9.0"
-git tag 1.1; git push --tags
+git tag 1.1.1; git push --tags
 
 pod repo push LcLib LcLib.podspec
