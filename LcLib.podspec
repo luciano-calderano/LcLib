@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
 # 1
 s.platform = :ios
-s.ios.deployment_target = '11.0'
+s.ios.deployment_target = '9.0'
 s.name = "LcLib"
 s.summary = "LcLib - Utilità standard."
 s.requires_arc = true
@@ -19,14 +19,14 @@ LICENSE
 }
 
 # 4 - Replace with your name and e-mail address
-s.author = { "Luciano C." => "luciano.c@virgilio.it" }
+s.author = { "Luciano C." => "luciano.calderano@hotmail.it" }
 
 
 # 5 - Replace this URL with your own Github page's URL (from the address bar)
-s.homepage = "https://github.com/lucianocalderano"
+s.homepage = "https://github.com/luciano-calderano"
 
 # 6 - Replace this URL with your own Git URL from "Quick Setup"
-s.source = { :git => "https://github.com/lucianocalderano/LcLib.git", :tag => "#{s.version}"}
+s.source = { :git => "https://github.com/luciano-calderano/LcLib.git", :tag => "1.1.1"}
 
 # 7
 s.framework = "UIKit"
