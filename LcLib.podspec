@@ -9,7 +9,7 @@ s.requires_arc = true
 s.swift_version = "4.2"
 
 # 2
-s.version = "1.1.1"
+s.version = "1.1.2"
 
 # 3
 s.license = { :type => 'LcLib License #{s.version}', :text => <<-LICENSE
@@ -26,7 +26,7 @@ s.author = { "Luciano C." => "luciano.calderano@hotmail.it" }
 s.homepage = "https://github.com/luciano-calderano"
 
 # 6 - Replace this URL with your own Git URL from "Quick Setup"
-s.source = { :git => "https://github.com/luciano-calderano/LcLib.git", :tag => "1.1.1"}
+s.source = { :git => "https://github.com/luciano-calderano/LcLib.git", :tag => "1.1.2"}
 
 # 7
 s.framework = "UIKit"
