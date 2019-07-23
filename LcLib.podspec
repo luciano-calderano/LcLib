@@ -6,7 +6,7 @@ s.ios.deployment_target = '9.0'
 s.name = "LcLib"
 s.summary = "LcLib - Utilità standard."
 s.requires_arc = true
-s.swift_version = "4.2"
+s.swift_version = "5"
 
 # 2
 s.version = "2.0"
